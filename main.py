@@ -36,6 +36,7 @@ EMAIL_ADDRESS = ["nguyenngocduy9@gmail.com"]
 SLACK_PASSWORD = ["Lu@escape2"]
 TARGET_URL = "https://raw.githubusercontent.com/bbejeck/hadoop-algorithms/master/src/shakespeare.txt"
 
+# Take screenshot in case of exception thrown
 class ScreenshotListener(AbstractEventListener):
     def on_exception(self, exception, driver):
         screenshot_name = "exception.png"
