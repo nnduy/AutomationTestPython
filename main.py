@@ -137,9 +137,9 @@ class PythonOrgSearch(unittest.TestCase):
             str1 = msg['snippet']
             print(str1)
             print(re.findall('\d+', str1))
-            a = re.findall('\d+', str1)
-            b = a[-2:]
-            digit_confirmation_code = b[0] + b[1]
+            int_a = re.findall('\d+', str1)
+            int_b = int_a[-2:]
+            digit_confirmation_code = int_b[0] + int_b[1]
             # digit_confirmation_code = int(digit_confirmation_code)
             # print(digit_confirmation_code)
 
@@ -478,6 +478,8 @@ class PythonOrgSearch(unittest.TestCase):
 
         elm_password = driver1.find_element_by_xpath("//*[@name='password']")
         elm_password.send_keys("M1nhbien@")
+        # Finding the elment below is not optimize. Because it will fail for log in Gmail in another language
+        # Need to improving codind here
         elm_button = driver1.find_element_by_xpath("//span[text() ='Dalej']")
         driver1.execute_script("arguments[0].click();", elm_button)
         time.sleep(10)
@@ -490,9 +492,9 @@ class PythonOrgSearch(unittest.TestCase):
         elm_email_header    = driver1.find_element_by_xpath("//*//h2[@class='hP']")
         str_text = elm_email_header.text
         print(str_text)
-        a = re.findall('\d+', str_text)
-        b = a[-2:]
-        digit_confirmation_code = b[0] + b[1]
+        int_a = re.findall('\d+', str_text)
+        int_b = int_a[-2:]
+        digit_confirmation_code = int_b[0] + int_b[1]
         print(digit_confirmation_code)
         time.sleep(2)
         driver1.close()
