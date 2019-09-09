@@ -319,13 +319,14 @@ class PythonOrgSearch(unittest.TestCase):
         # Get input element for user to send messages
         elm = driver.find_element_by_xpath("//div[@role='textbox' and @aria-label='Message #" + child_node_name + "\' or @aria-label='Message " + child_node_name + "']")
 
-
         # Get large message from the book online
         data = urllib.request.urlopen(TARGET_URL) # it's a file like object and works just like a file
-        for line in data: # files are iterable
+        for i, line in enumerate(data): # files are iterable
             str_line = str(line)
             str_line = str_line[2:-3] # remove first and 2 last characters, which are break and linefeeds.
             elm.send_keys(str_line, Keys.ENTER) # Send message
+            if i > 36:
+                break
         time.sleep(5)
 
     # TESTCASE 04:  Into “advanced” as “Code or text snippet”:
@@ -434,7 +435,7 @@ class PythonOrgSearch(unittest.TestCase):
         main_dlg = app.window(title_re='Open')
 
         # Print all controls on the dialog for searching the right control to enter path of the file
-        main_dlg.print_control_identifiers()
+        # main_dlg.print_control_identifiers()
         dialogs = app.windows()
         # print(dialogs)
 
