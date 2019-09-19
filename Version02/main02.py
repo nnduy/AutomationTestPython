@@ -138,7 +138,7 @@ class SlackQA(unittest.TestCase):
         list_messages = []
         # message_elements = self.driver.find_elements_by_xpath("//span[@class='c-message__body']")
         message_elements = main_page.get_elements_messages_list()
-        time.sleep(15)  # Waiting for retrieve all messages after scrolling up
+        time.sleep(65)  # Waiting for retrieve all messages after scrolling up
 
         for msg in message_elements:
             line = msg.text
