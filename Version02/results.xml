@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8"?>
+<testsuites>
+    <testsuite errors="0" failures="0" hostname="DESKTOP-UICMDGF" name="pytest" skipped="0" tests="3" time="180.382"
+               timestamp="2019-09-19T17:27:49.116760">
+        <testcase classname=".SlackQA" file="F:\Duy\Semester 3\HumanBiometric\SlackQA\Version02\main02.py" line="53"
+                  name="test_03_InsertLargeMessage" time="46.035">
+            <system-out>setUpClass executed
+            </system-out>
+        </testcase>
+        <testcase classname=".SlackQA" file="F:\Duy\Semester 3\HumanBiometric\SlackQA\Version02\main02.py" line="78"
+                  name="test_05_UploadTxtFile" time="33.613">
+            <system-out>F:\Duy\Semester 3\HumanBiometric\SlackQA\Version02\05.txt
+                response content: b&apos;{&quot;ok&quot;:true,&quot;file&quot;:{&quot;id&quot;:&quot;FNHQ6Q7RA&quot;,&quot;created&quot;:1568906945,&quot;timestamp&quot;:1568906945,&quot;name&quot;:&quot;05.txt&quot;,&quot;title&quot;:&quot;Sending
+                file using Slack API&quot;,&quot;mimetype&quot;:&quot;text\\/plain&quot;,&quot;filetype&quot;:&quot;text&quot;,&quot;pretty_type&quot;:&quot;Plain
+                Text&quot;,&quot;user&quot;:&quot;UMDBHDK34&quot;,&quot;editable&quot;:true,&quot;size&quot;:121,&quot;mode&quot;:&quot;snippet&quot;,&quot;is_external&quot;:false,&quot;external_type&quot;:&quot;&quot;,&quot;is_public&quot;:false,&quot;public_url_shared&quot;:false,&quot;display_as_bot&quot;:false,&quot;username&quot;:&quot;&quot;,&quot;url_private&quot;:&quot;https:\\/\\/files.slack.com\\/files-pri\\/TMQQWFLH3-FNHQ6Q7RA\\/05.txt&quot;,&quot;url_private_download&quot;:&quot;https:\\/\\/files.slack.com\\/files-pri\\/TMQQWFLH3-FNHQ6Q7RA\\/download\\/05.txt&quot;,&quot;permalink&quot;:&quot;https:\\/\\/teamacaisoft.slack.com\\/files\\/UMDBHDK34\\/FNHQ6Q7RA\\/05.txt&quot;,&quot;permalink_public&quot;:&quot;https:\\/\\/slack-files.com\\/TMQQWFLH3-FNHQ6Q7RA-6a2ef88c7e&quot;,&quot;edit_link&quot;:&quot;https:\\/\\/teamacaisoft.slack.com\\/files\\/UMDBHDK34\\/FNHQ6Q7RA\\/05.txt\\/edit&quot;,&quot;preview&quot;:&quot;---------------------\\r\\n\\r\\nAAAAAAAAAAAAAAAAAAAAA\\r\\n\\r\\nBBBBBBBBBBBBBBBBBBBBB\\r&quot;,&quot;preview_highlight&quot;:&quot;&lt;div
+                class=\\&quot;CodeMirror cm-s-default CodeMirrorServer\\&quot; oncopy=\\&quot;if(event.clipboardData){event.clipboardData.setData(\&apos;text\\/plain\&apos;,window.getSelection().toString().replace(\\/\\\\u200b\\/g,\&apos;\&apos;));event.preventDefault();event.stopPropagation();}\\&quot;&gt;\\n&lt;div
+                class=\\&quot;CodeMirror-code\\&quot;&gt;\\n&lt;div&gt;&lt;pre&gt;---------------------&lt;\\/pre&gt;&lt;\\/div&gt;\\n&lt;div&gt;&lt;pre&gt;&lt;\\/pre&gt;&lt;\\/div&gt;\\n&lt;div&gt;&lt;pre&gt;AAAAAAAAAAAAAAAAAAAAA&lt;\\/pre&gt;&lt;\\/div&gt;\\n&lt;div&gt;&lt;pre&gt;&lt;\\/pre&gt;&lt;\\/div&gt;\\n&lt;div&gt;&lt;pre&gt;BBBBBBBBBBBBBBBBBBBBB&lt;\\/pre&gt;&lt;\\/div&gt;\\n&lt;div&gt;&lt;pre&gt;&lt;\\/pre&gt;&lt;\\/div&gt;\\n&lt;\\/div&gt;\\n&lt;\\/div&gt;\\n&quot;,&quot;lines&quot;:9,&quot;lines_more&quot;:4,&quot;preview_is_truncated&quot;:false,&quot;comments_count&quot;:0,&quot;is_starred&quot;:false,&quot;shares&quot;:{&quot;private&quot;:{&quot;CMQQW1U72&quot;:[{&quot;reply_users&quot;:[],&quot;reply_users_count&quot;:0,&quot;reply_count&quot;:0,&quot;ts&quot;:&quot;1568906945.002100&quot;,&quot;channel_name&quot;:&quot;simple&quot;,&quot;team_id&quot;:&quot;TMQQWFLH3&quot;}]}},&quot;channels&quot;:[],&quot;groups&quot;:[&quot;CMQQW1U72&quot;],&quot;ims&quot;:[],&quot;has_rich_preview&quot;:false}}&apos;
+            </system-out>
+        </testcase>
+        <testcase classname=".SlackQA" file="F:\Duy\Semester 3\HumanBiometric\SlackQA\Version02\main02.py" line="117"
+                  name="test_08_LoginAsSecondUserToCheckText" time="99.919">
+            <system-out>&lt;selenium.webdriver.remote.webelement.WebElement (session=&quot;5423c04727c5efd9b92f6c23dce21457&quot;,
+                element=&quot;d482e474-4da8-4c19-b77c-223f515c2cff&quot;)&gt;
+                Full of messages received length: 20
+                Full book: [&apos;\\xef\\xbb\\xbfThe Project Gutenberg EBook of The Complete Works of William
+                Shakespeare, by &apos;, &apos;William Shakespeare&apos;, &apos;&apos;, &apos;This eBook is for the use
+                of anyone anywhere at no cost and with&apos;, &apos;almost no restrictions whatsoever. You may copy it,
+                give it away or&apos;, &apos;re-use it under the terms of the Project Gutenberg License included&apos;,
+                &apos;with this eBook or online at www.gutenberg.org&apos;, &apos;&apos;, &apos;** This is a COPYRIGHTED
+                Project Gutenberg eBook, Details Below **&apos;, &apos;** Please follow the copyright guidelines in this
+                file. **&apos;, &apos;&apos;, &apos;Title: The Complete Works of William Shakespeare&apos;, &apos;&apos;,
+                &apos;Author: William Shakespeare&apos;, &apos;&apos;, &apos;Posting Date: September 1, 2011 [EBook
+                #100]&apos;, &apos;Release Date: January, 1994&apos;, &apos;&apos;, &apos;Language: English&apos;,
+                &apos;&apos;, &apos;&apos;, &apos;*** START OF THIS PROJECT GUTENBERG EBOOK COMPLETE WORKS--WILLIAM
+                SHAKESPEARE ***&apos;, &apos;&apos;, &apos;&apos;, &apos;&apos;, &apos;&apos;, &apos;Produced by World
+                Library, Inc., from their Library of the Future&apos;, &apos;&apos;, &apos;&apos;, &apos;&apos;, &apos;&apos;,
+                &apos;This is the 100th Etext file presented by Project Gutenberg, and&apos;, &apos;is presented in
+                cooperation with World Library, Inc., from their&apos;, &apos;Library of the Future and Shakespeare
+                CDROMS. Project Gutenberg&apos;, &apos;often releases Etexts that are NOT placed in the Public Domain!!&apos;,
+                &apos;&apos;, &apos;Shakespeare&apos;, &apos;&apos;]
+                Full book length: 38
+                Size in set of the messages: 20
+                size in set of the book: 21
+                Length of set intersection between messages and the book: 19
+                Percentage of lines were sent: 90.47619047619048
+                tearDownClass executed
+            </system-out>
+        </testcase>
+    </testsuite>
+</testsuites>
