@@ -1,8 +1,10 @@
-from pywinauto.application import Application
 import unittest
 import time
 from selenium import webdriver
-from Version02 import page
+from . import page
+import os
+import requests
+
 import urllib.request  # the lib that handles the url stuff
 
 DOMAIN_NAME = ["teamacaisoft"]
@@ -14,7 +16,8 @@ SECOND_USER_EMAIL_ADDRESS = "tranvanba777@gmail.com"
 SECOND_USER_PASSWORD = "M1nhbien@"
 
 TARGET_URL = "https://raw.githubusercontent.com/bbejeck/hadoop-algorithms/master/src/shakespeare.txt"
-
+# Set the webhook_url to the one provided by Slack when you create the webhook at https://my.slack.com/services/new/incoming-webhook/
+WEBHOOK_URL = 'https://hooks.slack.com/services/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'
 
 class SlackQA(unittest.TestCase):
     """A sample test class to show how page object works"""
@@ -42,6 +45,24 @@ class SlackQA(unittest.TestCase):
         main_page.text_descend_button_click("Sign in")
         return main_page
 
+    # TESTCASE 03:  Into “simple” inset The Complete Works of William Shakespeare or Insert large message
+    #   from https://raw.githubusercontent.com/bbejeck/hadoop-algorithms/master/src/shakespeare.txt
+    #   every line as a separate slack message
+    # Step 01: Sign in, input domain name, email and new password
+    # Step 02: Choosing "Channels" and the existence "simple" channel by function choosing_child
+    # Step 03: Find the input message field and send all lines of the book.
+    def test_03_InsertLargeMessage(self):
+        # Signin Slack
+        main_page = self.sign_in_slack(DOMAIN_NAME, EMAIL_ADDRESS, SLACK_PASSWORD)
+
+        # Choosing child node
+        father_node_name = "Channels"
+        child_node_name = "simple"
+        main_page.choosing_child(father_node_name, child_node_name)
+
+        # Send multiple lines (36 lines) from file to webhoook using Slack API
+        main_page.send_multiple_line_message(TARGET_URL, WEBHOOK_URL)
+
     # TESTCASE 05:  Into “advanced” upload some txt file (05.txt) with the content:
     # ---------------------
     # AAAAAAAAAAAAAAAAAAAAA
@@ -61,32 +82,25 @@ class SlackQA(unittest.TestCase):
 
         # Choosing child node
         father_node_name = "Channels"
-        child_node_name = "advanced37"
+        child_node_name = "simple"
         main_page.choosing_child(father_node_name, child_node_name)
 
-        main_page.click_paperclip_button()
-        main_page.click_yourcomputer_button()
+        SLACK_API_TOKEN = 'xoxp-738846530581-727391461106-757909096289-e6edda5434da3f3c00e827bcf788d740'
+        channel = "simple"
+        dirname = os.path.dirname(__file__)
+        filename = os.path.join(dirname, '05.txt')
+        print(filename)
+        file = open(filename, 'rb')
 
-        # Connect to "Window Explorer" window with title as "Open"
-        time.sleep(5)
-        app = Application().connect(title_re='Open')
-        main_dlg = app.window(title_re='Open')
+        response = requests.post('https://slack.com/api/files.upload',
+                                 data={'token': SLACK_API_TOKEN, 'channels': [channel],
+                                       'title': 'Sending file using Slack API'},
+                                 files={'file': file})
+        file.close()
 
-        # Print all controls on the dialog for searching the right control to enter path of the file
-        # main_dlg.print_control_identifiers()
-        # dialogs = app.windows()
-        # print(dialogs)
+        print("response content:", response.content)
 
-        # After found dialogs is "Edit". I slowly input input information and click on "Open"
-        main_dlg.Edit.type_keys("C:\\Users\\Daniel\\Desktop\\05.txt",
-                                with_spaces=True,
-                                with_newlines=False,
-                                pause=0.1,
-                                with_tabs=False)
-        main_dlg.Open.click()
 
-        # Find button "Upload" and click using pre-defined function
-        main_page.text_button_click("Upload")
 
     # TESTCASE 08:  Log in as the second user and check that The Complete Works of William Shakespeare is added
     # Step 01: Sign in the second user (tranvanba777), input domain name, email and new password
