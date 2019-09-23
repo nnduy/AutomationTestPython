@@ -80,19 +80,21 @@ class SlackQA(unittest.TestCase):
         main_page.text_button_click('skip for now')
         main_page.text_button_click('See Your Channel in Slack')
 
-    # # TESTCASE 02a: Create a private channel "simple"
-    # # Step 01: Sign in, input domain name, email and new password
-    # # Step 02: Click on "Channels" and create new "Channel"
-    # # Step 03: Input required information and click "Create"
-    # def test_02a_create_team_on_slack(self):
-    #     self.create_team_on_slack("simple", "purpose", "invite_to", "private")
-    #
-    # # TESTCASE 02b: Create a private channel "advanced"
-    # # Step 01: Sign in, input domain name, email and new password
-    # # Step 02: Click on "Channels" and create new "Channel"
-    # # Step 03: Input required information and click "Create"
-    # def test_02b_create_team_on_slack(self):
-    #     self.create_team_on_slack("advanced", "purpose", "invite_to", "private")
+    # TESTCASE 02a: Create a private channel "simple"
+    # Step 01: Sign in, input domain name, email and new password
+    # Step 02: Click on "Channels" and create new "Channel"
+    # Step 03: Input required information and click "Create"
+    def test_02a_CreateTeamOnSlack(self):
+        main_page = self.sign_in_slack(DOMAIN_NAME, EMAIL_ADDRESS, SLACK_PASSWORD)
+        main_page.create_team_on_slack("simple", "purpose", "invite_to", "private")
+
+    # TESTCASE 02b: Create a private channel "advanced"
+    # Step 01: Sign in, input domain name, email and new password
+    # Step 02: Click on "Channels" and create new "Channel"
+    # Step 03: Input required information and click "Create"
+    def test_02b_CreateTeamOnSlack(self):
+        main_page = self.sign_in_slack(DOMAIN_NAME, EMAIL_ADDRESS, SLACK_PASSWORD)
+        main_page.create_team_on_slack("advanced", "purpose", "invite_to", "private")
 
     # TESTCASE 03:  Into “simple” inset The Complete Works of William Shakespeare or Insert large message
     #   from https://raw.githubusercontent.com/bbejeck/hadoop-algorithms/master/src/shakespeare.txt

@@ -114,6 +114,11 @@ class MainPage(BasePage):
             EC.presence_of_element_located((By.XPATH, "//button[contains(text(), \'" + text + "\')]")))
         elm.click()
 
+    def clicking_fulltext_button(self, text):
+        elm = WebDriverWait(self.driver, 5).until(
+            EC.presence_of_element_located((By.XPATH, "//button[text() = \'" + text + "\']")))
+        elm.click()
+
     def choosing_child(self, father, child):
         elm = WebDriverWait(self.driver, 5).until(EC.presence_of_element_located(
             (By.XPATH, "//button[text() = \'" + father + "\']//following::span[text() = \'" + child + "\']")))
@@ -123,6 +128,41 @@ class MainPage(BasePage):
         elm = WebDriverWait(self.driver, 5).until(EC.presence_of_element_located(
             (By.XPATH, "//input[@id='signup_email']")))
         elm.send_keys(email)
+
+    # Entering data for input form with title
+    def input_enter_data(self, input_title, input_data):
+        elm = WebDriverWait(self.driver, 5).until(EC.presence_of_element_located(
+            (By.XPATH, "//*[text() = \'" + input_title + "\']//following::input")))
+        elm.send_keys(input_data)
+
+    # Entering data for input form with title
+    def input_div_data(self, input_title, name):
+        elm = WebDriverWait(self.driver, 5).until(EC.presence_of_element_located(
+            (By.XPATH,
+             "//*[contains(text(),\'" + input_title + "\')]/ancestor::label/following-sibling::div//descendant::div/div")))
+        # elm.send_keys(input_data)
+        # elm = self.driver.find_element_by_xpath("/html/body/div[6]/div/div/div/div/div[1]/div[2]/div[1]/div[1]")
+        # purpose_name = "purpose" + str(random.randint(102,201))
+        elm.send_keys(name)
+
+    # Check or uncheck checkbox as data
+    def checkbox_choose(self, checkbox_title, data):
+        elm = WebDriverWait(self.driver, 5).until(EC.presence_of_element_located(
+            (By.XPATH, "//*[text() = \'" + checkbox_title + "\']//following::input")))
+        if elm.is_selected():
+            # print("is selected")
+            if data == "unchecked":
+                self.driver.execute_script("arguments[0].click();", elm)
+        else:
+            # print("not selected")
+            if data == "checked":
+                self.driver.execute_script("arguments[0].click();", elm)
+
+    # Clicking button with specific title/label
+    def button_click(self, title):
+        elm = WebDriverWait(self.driver, 5).until(EC.presence_of_element_located(
+            (By.XPATH, "//*[@type='button' and contains(text(), \'" + title + "\')]")))
+        elm.click()
 
     def getting_confimration_code(self, data_folder, file_to_open):
         store = file.Storage('token.json')
@@ -200,6 +240,32 @@ class MainPage(BasePage):
                 self.send_one_line_message(webhook, str_line)
             if i > 36:
                 break
+
+    # Input: name of the channel, purpose to create, invitation to someone, private or not
+    # Output: new channel created
+    # Tools used: WebDriverWait
+    # Step 01: Sign in, input domain name, email and new password
+    # Step 02: Click on "Channels" and create new "Channel"
+    # Step 03: Input required information and click "Create"
+    def create_team_on_slack(self, name, purpose, invite_to, isPrivate):
+        driver = self.driver
+
+        # Clicking button with specific title/label/text
+        self.clicking_fulltext_button('Channels')
+        self.clicking_fulltext_button('Create Channel')
+
+        simple_name = name + str(random.randint(1, 101))
+        self.input_enter_data("Name", simple_name)
+
+        purpose_name = purpose + str(random.randint(102, 201))
+        self.input_div_data("Purpose", purpose_name)
+
+        if isPrivate == "private":
+            self.checkbox_choose("Make private", "checked")
+        else:
+            self.checkbox_choose("Make private", "unchecked")
+
+        self.button_click("Create")
 
 class SearchResultsPage(BasePage):
     """Search results page action methods come here"""
