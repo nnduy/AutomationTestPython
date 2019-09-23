@@ -68,6 +68,12 @@ class MainPage(BasePage):
         element = self.driver.find_element(*MainPageLocators.PAPERCLIP_BUTTON)
         element.click()
 
+    def click_div_contain_text(self, text):
+        elm = WebDriverWait(self.driver, 5).until(
+            EC.presence_of_element_located((By.XPATH, "//div[contains(text(),\'" + text + "\')]")))
+        elm.click()
+
+
     def click_yourcomputer_button(self):
         element = self.driver.find_element(*MainPageLocators.YOURCOMPUTER_BUTTON)
         element.click()
@@ -134,6 +140,37 @@ class MainPage(BasePage):
         elm = WebDriverWait(self.driver, 5).until(EC.presence_of_element_located(
             (By.XPATH, "//*[text() = \'" + input_title + "\']//following::input")))
         elm.send_keys(input_data)
+
+    # Input data for label "Title"
+    def sendData_input_first(self, input_title, input_data):
+        elm = WebDriverWait(self.driver, 5).until(EC.presence_of_element_located(
+            (By.XPATH, "//*[text() = \'" + input_title + "\']//following::input[1]")))
+        elm.send_keys(input_data)
+
+    # Input comments in comment box
+    def add_comment(self, input_title, input_data):
+        elm = WebDriverWait(self.driver, 5).until(EC.presence_of_element_located(
+            (By.XPATH, "//div[@role='textbox' and @aria-label=\'" + input_title + "\']")))
+        elm.send_keys(input_data)
+
+    # Input combo list data for label "Type"
+    def sendData_comboList_first(self, input_title, input_data):
+        elm = WebDriverWait(self.driver, 5).until(EC.presence_of_element_located(
+            (By.XPATH, "//*[text() = \'" + input_title + "\']//following::input[1]")))
+        elm.click
+        self.driver.execute_script("arguments[0].click();", elm)
+        elm_plaintext = WebDriverWait(self.driver, 5).until(EC.presence_of_element_located(
+            (By.XPATH, "//span[text() = \'" + input_data + "\']")))
+        elm_plaintext.click()
+
+    # Input data for label "Content"
+    def send_keys_textarea(self, textarea_title, textarea_data):
+        elm = WebDriverWait(self.driver, 5).until(EC.presence_of_element_located(
+            (By.XPATH, "//*[text() = \'" + textarea_title + "\']//following::textarea")))
+        elm.send_keys(textarea_data)
+        # driver.execute_script("arguments[0].click();", elm_content)
+        # driver.execute_script("arguments[0].value = arguments[1]", elm_content, "snippet content snippet content!")
+
 
     # Entering data for input form with title
     def input_div_data(self, input_title, name):

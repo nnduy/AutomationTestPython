@@ -6,6 +6,7 @@ import os
 import requests
 from pathlib import Path
 from selenium.webdriver.support.events import AbstractEventListener
+from selenium.webdriver.common.action_chains import ActionChains
 
 import urllib.request  # the lib that handles the url stuff
 
@@ -113,6 +114,43 @@ class SlackQA(unittest.TestCase):
 
         # Send multiple lines (36 lines) from file to webhoook using Slack API
         main_page.send_multiple_line_message(TARGET_URL, WEBHOOK_URL)
+
+    # TESTCASE 04:  Into “advanced” as “Code or text snippet”:
+    # title: “Example title”
+    # type: "Plain Text"
+    # content: “snippet content snippet content”
+    # comment: “firts”
+    # Step 01: Sign in, input domain name, email and new password
+    # Step 02: Choosing "Channels" and the existence private "advanced37" channel by function choosing_child
+    # Step 03: Choose Paperclip, Create New, Code or text snippet
+    # Step 04: Input required information and click "Create Snippet"
+    def test_04_AddCodeTextSnippet(self):
+        # Signin Slack
+        main_page = self.sign_in_slack(DOMAIN_NAME, EMAIL_ADDRESS, SLACK_PASSWORD)
+
+        # Choosing child node
+        father_node_name = "Channels"
+        child_node_name = "advanced37"
+        main_page.choosing_child(father_node_name, child_node_name)
+
+        # Choosing "paperclip", "create new", "code or text snippet" items menu
+        main_page.click_paperclip_button()
+        main_page.click_div_contain_text('Create new...')
+        main_page.click_div_contain_text('Code or text snippet')
+
+        actions = ActionChains(self.driver)
+        actions.send_keys('snippet content snippet content!')
+        actions.perform()
+
+        # Find element with placeholder as "snippet.txt" and type in title field
+        main_page.sendData_input_first('Title (optional)', 'Example title')
+        main_page.sendData_comboList_first('Type', 'Plain Text')
+
+        # Find comment element and type in "firts"
+        main_page.add_comment('Add a message, if you’d like.', 'first')
+
+        # Click button "Create Snippet" by the function button_click
+        main_page.clicking_fulltext_button("Create Snippet")
 
     # TESTCASE 05:  Into “advanced” upload some txt file (05.txt) with the content:
     # ---------------------
