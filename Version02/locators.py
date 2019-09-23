@@ -4,6 +4,8 @@ from selenium.webdriver.common.by import By
 class MainPageLocators(object):
     """A class for main page locators. All main page locators should come here"""
     GO_BUTTON = (By.ID, 'submit')
+    SUBMIT_BUTTON = (By.ID, 'submit_btn')
+    NEXT_BUTTON = (By.XPATH, "//*[text()='Next']")
     PAPERCLIP_BUTTON = (By.XPATH, "//*[@type='paperclip']")
     YOURCOMPUTER_BUTTON = (By.XPATH, "//div[contains(text(),'Your computer')]")
     SCROLL_LIST = (By.XPATH, "(//div[@role='presentation' and @class='c-scrollbar__child'])[2]")

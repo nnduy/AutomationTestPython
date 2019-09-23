@@ -4,12 +4,17 @@ from selenium import webdriver
 from . import page
 import os
 import requests
+from pathlib import Path
+from selenium.webdriver.support.events import AbstractEventListener
 
 import urllib.request  # the lib that handles the url stuff
+
 
 DOMAIN_NAME = ["teamacaisoft"]
 EMAIL_ADDRESS = ["nguyenngocduy9@gmail.com"]
 SLACK_PASSWORD = ["Lu@escape2"]
+# REGISTERED_URL = "https://slack.com/create#email"
+REGISTERED_EMAIL = "nguyenngocduy9@gmail.com"
 
 # Second user
 SECOND_USER_EMAIL_ADDRESS = "tranvanba777@gmail.com"
@@ -18,6 +23,14 @@ SECOND_USER_PASSWORD = "M1nhbien@"
 TARGET_URL = "https://raw.githubusercontent.com/bbejeck/hadoop-algorithms/master/src/shakespeare.txt"
 # Set the webhook_url to the one provided by Slack when you create the webhook at https://my.slack.com/services/new/incoming-webhook/
 WEBHOOK_URL = 'https://hooks.slack.com/services/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'
+
+
+# Take screenshot in case of exception thrown
+class ScreenshotListener(AbstractEventListener):
+    def on_exception(self, exception, driver):
+        screenshot_name = "exception2.png"
+        driver.get_screenshot_as_file(screenshot_name)
+        print("Screenshot saved as '%s'" % screenshot_name)
 
 class SlackQA(unittest.TestCase):
     """A sample test class to show how page object works"""
@@ -28,7 +41,7 @@ class SlackQA(unittest.TestCase):
 
     def setUp(self):
         self.driver = webdriver.Chrome()
-        self.driver.get("https://slack.com/signin")
+        # self.driver = webdriver.Firefox()
         self.driver.maximize_window()
 
     # Function SignIn Slack:
@@ -36,6 +49,7 @@ class SlackQA(unittest.TestCase):
     def sign_in_slack(self, domain, email, password):
         # Load the main page. In this case the home page of Slack Sign in.
         main_page = page.MainPage(self.driver)
+        self.driver.get("https://slack.com/signin")
 
         main_page.signin_domain_text_element = domain
         main_page.text_descend_button_click("Continue")
@@ -44,6 +58,41 @@ class SlackQA(unittest.TestCase):
         main_page.input_password_text_element = password
         main_page.text_descend_button_click("Sign in")
         return main_page
+
+    # TESTCASE 01: Create a new team on slack
+    # Step 01: Sign up for a new account by using email
+    # Step 02: Waiting and Fetching confirmation code by using Google API to read the latest email.
+    #           In order to use Google API, I need to create credentials.json file to access the email address.
+    # Step 03: Input confirmation code and proceed by input team name and project name
+    def test_01_CreateTeamOnSlack(self):
+        main_page = page.MainPage(self.driver)
+        self.driver.get("https://slack.com/create#email")
+        main_page.register_team(REGISTERED_EMAIL)
+        main_page.text_ancestor_button_click('Next')
+
+        # Waiting for confirmation code from Gmail
+        data_folder = Path("readEmailPython/")
+        file_to_open = data_folder / "credentials.json"
+        code = main_page.getting_confimration_code(data_folder, file_to_open)
+        main_page.send_confirm_code('Check your email!', code)
+        main_page.create_new_team()
+        main_page.create_new_project()
+        main_page.text_button_click('skip for now')
+        main_page.text_button_click('See Your Channel in Slack')
+
+    # # TESTCASE 02a: Create a private channel "simple"
+    # # Step 01: Sign in, input domain name, email and new password
+    # # Step 02: Click on "Channels" and create new "Channel"
+    # # Step 03: Input required information and click "Create"
+    # def test_02a_create_team_on_slack(self):
+    #     self.create_team_on_slack("simple", "purpose", "invite_to", "private")
+    #
+    # # TESTCASE 02b: Create a private channel "advanced"
+    # # Step 01: Sign in, input domain name, email and new password
+    # # Step 02: Click on "Channels" and create new "Channel"
+    # # Step 03: Input required information and click "Create"
+    # def test_02b_create_team_on_slack(self):
+    #     self.create_team_on_slack("advanced", "purpose", "invite_to", "private")
 
     # TESTCASE 03:  Into “simple” inset The Complete Works of William Shakespeare or Insert large message
     #   from https://raw.githubusercontent.com/bbejeck/hadoop-algorithms/master/src/shakespeare.txt
