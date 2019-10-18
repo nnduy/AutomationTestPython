@@ -10,6 +10,8 @@ Test case list:
 7	Add that user to “Channels” channel
 8	Log in new user and check the previous long message sent
 
+Overview of the tasks: https://docs.google.com/spreadsheets/d/1KfNaf01eTxm1p6xzfJy5Z9OG9H0MRFLpFqJwIEjIyr0/edit?usp=sharing
+
 Screenshot Videos: https://drive.google.com/open?id=1uY2VFR56Jzf9ZEFmjl38XkZpIcO-PTDM
 
 Skill and techniques used:
@@ -27,3 +29,5 @@ Skill and techniques used:
 
 Future Improvements: 
   Robot Framework
+
+
