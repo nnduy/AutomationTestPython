@@ -14,7 +14,7 @@ Overview of the tasks: https://docs.google.com/spreadsheets/d/1KfNaf01eTxm1p6xzf
 
 Screenshot Videos: https://drive.google.com/open?id=1uY2VFR56Jzf9ZEFmjl38XkZpIcO-PTDM
 
-Skill and techniques used:
+Techniques used:
   Google API
   Selenium Explicit waits (WebDriverWait)
   driver.execute_script
